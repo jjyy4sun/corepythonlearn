@@ -1,0 +1,32 @@
+literal;Match literal string value literal;foo
+|;Match regular expressions rel1 or rel2;foo|bar
+.;Match any character(except\n);b.b
+^;Match start of string;^Dear
+$;Match end of string;/bin/*sh$
+*;Match 0 or more occurrences of preceding regex;[A-Za-z0-9]*
++;Match 1 or more occurrences of preceding regex;[a-z]+\.com
+?;Match 0 or 1 occurrence(s) of preceding regex;goo?
+{N};Match N occurrences of preceding;[0-9]{3}
+{M;N};Match from M to N occurrences of preceding regex;[0-9]{5;9}
+[...];Match any single character from character class;[aeiou]
+[..x-y..];Match any single charachter in the range from x to y;[0-9]
+[^...];Do not match any character from character class,including any ranges,if present;[^0-9]
+(*|+|?|{})?;Apply "non-greedy" versions of aboce occurrences/repition symbols(*,+,?,{});.*?[a-z]
+(...);Match enclosed regex and save as subgroup;([0-9]{3})?,f(oo|u)bar
+\d;Match any decimal digit,same as [0-9](\D is inverse of\d: do not match any dumeric digit);data\d+.txt
+\w;Match any alphanmeric character,same as [A-Za-z0-9_](\W is inverse of\w);[a-z_]\w+
+\s;Match any whitespace character,same as[\n\t\r\v\f](\S is inverse of\s);of\sthe
+\b;Match any word boundary(\B is inverse of \b);\bThe\b
+\N;Match saved subgroup N(see (...) above);price: \16
+\c;Match any special character c verbatim(i.e.,without its special meaning.literal);\.,\\,\*
+\A(\Z);Match start(end) of string(also see ^ and $ above);\ADear
+(?iLmsux);Enbed one or more specail "flags" parameters within the itself(vs. via function/method);(?x),(?im)
+(?:...);Signifies a group whose match is not saved;(?:\w+\.)*
+(?P<name>...);Like a regular group match only identified with name rather than a numeric ID;(?P<data>)
+(?P=name);Matches text previously grouped by (?p<name>) in the same string;(?P=data)
+(?#...);Specifies a comment,all contents within ignored;(?#comment)
+(?=...);Matches if ... comes next without consuming input string,called positve lookahead assertion;(?=.com)
+(?!...);Matches if ... comes next without comsuming input,called negative lookahead assertion;(?!.net)
+(?<=...);Matches if ... cines prior without consuming input string,called positive lookbegind assertion;(?<=880-)
+(?<!...);Matches if ... doesn't come prior without consuming input,called negative lookbegind assertion;(?<!192\.168\.)
+(?(id/name)Y|N);Conditional match of regex Y if group with given id or name exists else N,|N is opional;(?(1)y|x)
